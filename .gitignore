@@ -26,6 +26,9 @@ dist/
 # JetBrains IDE
 .idea/
 
+#VS Code IDE
+.vscode/
+
 # Unit test reports
 TEST*.xml
 
@@ -47,4 +50,8 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+
+#postgres volume
+postgres-data/
+
 

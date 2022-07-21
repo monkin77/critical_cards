@@ -1,0 +1,23 @@
+<div id="container">
+  <img id="big-logo" src="assets/CriticalCards.svg">
+  <div class="button-tray">
+    <button [disabled]="!isMain() && mode!=1" (click)="mode=1"> new </button>
+    <button class="alternative" [disabled]="!isMain() && mode!=2" (click)="mode=2"> join </button>
+    <button class="info"> help </button>
+  </div>
+  <div class="button-tray" *ngIf="mode==1">
+    <button class="affirmative" (click)="newPoker()"> poker </button>
+    <button class="affirmative" (click)="newRetro()"> retro </button>
+    <button (click)="mode=0"> cancel </button>
+  </div>
+  <div id="input-container" *ngIf="mode==2">
+    <div id="input-card">
+      <input id="sessionId" placeholder="session id" [(ngModel)]="sessionId"/>
+      <div class="button-tray">
+        <button class="affirmative" (click)="join(sessionId)"> join </button>
+        <button (click)="mode=0"> cancel </button>
+      </div>
+    </div>
+  </div>
+
+</div>

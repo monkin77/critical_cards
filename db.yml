@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: SummerCamp2022
+      POSTGRES_USER: postgres
+      POSTGRES_DB: CriticalCards
+    ports: 
+      - '5438:5432'
+    volumes: 
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql 

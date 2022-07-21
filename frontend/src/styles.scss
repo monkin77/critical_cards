@@ -1,0 +1,40 @@
+:root{
+  --color-CSWRed : rgb(192,23, 34);
+  --color-Btn-Alternative : #fb1;
+  --color-Btn-Affirmative: #4A4;
+  --color-Btn-Disabled: #666;
+  --color-Btn-Info: #09c;
+}
+
+button{
+  font-family: "Lucida Handwriting Italic", cursive;
+  border-radius: 10px;
+  border: solid 0.1em var(--color-CSWRed);
+  border-top-width: 1em;
+  border-bottom-width: 0.3em;
+  height: 3em;
+  width: 10ch;
+  position: relative;
+  top: 0;
+  transition: ease 0.5s;
+  margin: 1ch;
+  background-color: white;
+  &.alternative:enabled{
+    border-color: var(--color-Btn-Alternative);
+  }
+  &.info:enabled{
+    border-color: var(--color-Btn-Info);
+  }
+  &.affirmative:enabled{
+    border-color: var(--color-Btn-Affirmative);
+  }
+  &:disabled{
+    border-color: var(--color-Btn-Disabled);
+  }
+  &:hover:enabled{
+    top: -0.5em;
+    box-shadow: 0 0.5em 0.5em #3333;
+  }
+}
+
+

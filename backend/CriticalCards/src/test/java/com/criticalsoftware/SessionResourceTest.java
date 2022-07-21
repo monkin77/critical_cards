@@ -1,6 +1,5 @@
 package com.criticalsoftware;
 
-import com.criticalsoftware.cards.entities.Cards_Session;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 

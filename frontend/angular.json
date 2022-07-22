@@ -103,5 +103,8 @@
       },
       "sourceRoot": "src"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

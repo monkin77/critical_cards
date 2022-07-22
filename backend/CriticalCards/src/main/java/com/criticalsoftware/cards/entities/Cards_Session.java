@@ -33,6 +33,5 @@ public class Cards_Session extends PanacheEntity {
             return null;
         return retro;
     }
-
 }
 

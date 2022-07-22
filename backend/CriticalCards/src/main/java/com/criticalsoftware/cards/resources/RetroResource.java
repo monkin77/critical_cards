@@ -23,6 +23,7 @@ public class RetroResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRetro(long id) {
         Optional<Cards_Session> session = Cards_Session.findByIdOptional(id);
+        System.out.println("fixe!!");
         if (!session.isPresent())
             return Response.status(404).build();
         String json = RetroMapper.getDTO(session.get()).toJSON();

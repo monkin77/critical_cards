@@ -3,9 +3,9 @@ import { ColorService } from 'src/app/color.service';
 import { RetroCard } from 'src/app/DTOs/retro-card';
 
 @Component({
-	selector: 'app-retro-card',
-	templateUrl: './retro-card.component.html',
-	styleUrls: ['./retro-card.component.scss']
+  selector: 'app-retro-card',
+  templateUrl: './retro-card.component.html',
+  styleUrls: ['./retro-card.component.scss']
 })
 export class RetroCardComponent implements AfterViewChecked, OnInit {
 
@@ -15,15 +15,15 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   @Input('data')
   public data!: RetroCard;
 
-	public text = '';
-	public dark = false;
-	public writemode = false;
+  public text = '';
+  public dark = false;
+  public writemode = false;
 
-	public vote = false;
+  public vote = false;
 
   private openedWriteMode = false;
 
-	constructor(private readonly colorService: ColorService) {}
+  constructor(private readonly colorService: ColorService) {}
 
   ngOnInit(): void {
     this.updateCardMode();
@@ -36,23 +36,23 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
     }
   }
 
-	public setWriteMode(mode: boolean): void {
+  public setWriteMode(mode: boolean): void {
     this.openedWriteMode = !this.writemode && mode;
     this.writemode = mode;
-	}
+  }
 
-	public pickColor(event: MouseEvent): void {
+  public pickColor(event: MouseEvent): void {
     event.stopPropagation();
   }
 
-	public vote_action(event: MouseEvent): void {
+  public vote_action(event: MouseEvent): void {
     event.stopPropagation();
-	}
+  }
 
 
-	updateCardMode(): void {
-		const rgb = this.colorService.hexToRgb(this.data.color);
-		this.dark = rgb ? this.colorService.perceptiveLuminance(rgb) < 0.5 : false;
-	}
+  updateCardMode(): void {
+    const rgb = this.colorService.hexToRgb(this.data.color);
+    this.dark = rgb ? this.colorService.perceptiveLuminance(rgb) < 0.5 : false;
+  }
 
 }

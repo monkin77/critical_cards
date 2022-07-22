@@ -1,4 +1,4 @@
-h2 {
+.header {
     color: #000;
     font-size: 1em;
     font-family: "Lucida Handwriting Italic", cursive;
@@ -6,6 +6,10 @@ h2 {
     top: 0%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.edit-icon {
+    height: 0.6em;
 }
 
 .container {

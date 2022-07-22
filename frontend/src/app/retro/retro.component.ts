@@ -19,4 +19,8 @@ export class RetroComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editRetroName() {
+    console.log("TODO, Should edit");
+  }
+
 }

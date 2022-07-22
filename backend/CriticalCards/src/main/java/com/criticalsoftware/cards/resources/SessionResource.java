@@ -1,6 +1,5 @@
 package com.criticalsoftware.cards.resources;
 
-import com.criticalsoftware.cards.Entities;
 import com.criticalsoftware.cards.entities.Cards_Session;
 
 import javax.ws.rs.GET;
@@ -18,7 +17,7 @@ public class SessionResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSessionById(long id) {
-        Optional<Cards_Session> session = Entities.cards_session.findByIdOptional(id);
+        Optional<Cards_Session> session = Cards_Session.findByIdOptional(id);
         if (!session.isPresent())
             return Response.status(404).build();
         URI uri = UriBuilder.fromPath(session.get().session_type + "/" + id).build();

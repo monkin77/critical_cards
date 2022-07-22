@@ -1,12 +1,13 @@
 package com.criticalsoftware;
 
-import com.criticalsoftware.cards.Entities;
 import com.criticalsoftware.cards.entities.Cards_Session;
-import com.criticalsoftware.cards.resources.SessionResource;
-import com.criticalsoftware.cards.entities_mock.Cards_Session_Mock;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javax.enterprise.context.control.ActivateRequestContext;
+import javax.transaction.Transactional;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
@@ -14,15 +15,22 @@ import static org.hamcrest.CoreMatchers.*;
 @QuarkusTest
 public class SessionResourceTest {
     private static Cards_Session cs;
+    private static Cards_Session csNonExistent;
 
     @BeforeAll
+    @ActivateRequestContext
+    @Transactional
     public static void setup() {
-        Entities.testMode();
-
         cs = new Cards_Session();
+        cs.session_name = "test_session";
         cs.session_type = "retro";
-        cs.id = 0L;
-        Cards_Session_Mock.addSession(cs);
+        cs.persist();
+
+        csNonExistent = new Cards_Session();
+        cs.session_name = "not-null";
+        cs.session_type = "poker";
+        csNonExistent.persist();
+        csNonExistent.delete();
     }
 
     @Test
@@ -44,5 +52,12 @@ public class SessionResourceTest {
                 .then()
                 .statusCode(302)
                 .header("Location", endsWith("/" + cs.session_type + "/" + cs.id));
+    }
+
+    @AfterAll
+    @ActivateRequestContext
+    @Transactional
+    public static void cleanup() {
+        Cards_Session.findByIdOptional(cs.id).get().delete();
     }
 }

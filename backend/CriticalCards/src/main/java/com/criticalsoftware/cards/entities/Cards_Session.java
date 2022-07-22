@@ -1,11 +1,9 @@
 package com.criticalsoftware.cards.entities;
 
-import com.criticalsoftware.cards.Entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Entity;
 import javax.ws.rs.NotFoundException;
-import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +15,9 @@ public class Cards_Session extends PanacheEntity {
     public static long getDefaultLane(long retro) {
         List<Retro_Lane> laneList =
                 Retro_Lane.findBySession(retro);
-        if (laneList.size()==0)
+        if (laneList.size() == 0)
             throw new NotFoundException();
-        for (Retro_Lane retro_lane:laneList) {
+        for (Retro_Lane retro_lane : laneList) {
             if (retro_lane.retro_lane_name == null)
                 return retro_lane.id;
         }
@@ -27,7 +25,7 @@ public class Cards_Session extends PanacheEntity {
     }
 
     public static Cards_Session getRetro(long session) {
-        Optional<Cards_Session> retroOpt = Entities.cards_session.findByIdOptional(session);
+        Optional<Cards_Session> retroOpt = Cards_Session.findByIdOptional(session);
         if (!retroOpt.isPresent())
             return null;
         Cards_Session retro = retroOpt.get();
@@ -36,4 +34,3 @@ public class Cards_Session extends PanacheEntity {
         return retro;
     }
 }
-

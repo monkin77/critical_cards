@@ -14,6 +14,7 @@ public class Retro_Lane extends PanacheEntity {
     public int retro_lane_color;
 
     public static List<Retro_Lane> findBySession(long id) {
+        System.err.println("bad");
         return find("cards_session_id", id).list();
     }
 

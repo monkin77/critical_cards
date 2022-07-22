@@ -11,6 +11,7 @@ import { SessionComponent } from './session/session.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import { RetroCardComponent } from './retro/card/retro-card/retro-card.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
     PokerComponent,
     RetroComponent,
     SessionComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RetroCardComponent
   ],
   imports: [
     BrowserModule,

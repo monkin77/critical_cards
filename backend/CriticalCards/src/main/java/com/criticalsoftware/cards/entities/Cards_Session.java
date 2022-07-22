@@ -15,6 +15,7 @@ public class Cards_Session extends PanacheEntity {
     public static long getDefaultLane(long retro) {
         List<Retro_Lane> laneList =
                 Retro_Lane.findBySession(retro);
+        System.err.println(laneList);
         if (laneList.size() == 0)
             throw new NotFoundException();
         for (Retro_Lane retro_lane : laneList) {

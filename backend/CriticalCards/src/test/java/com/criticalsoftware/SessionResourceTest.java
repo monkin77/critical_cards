@@ -21,7 +21,7 @@ public class SessionResourceTest {
         cs.id = 0L;
         Cards_Session_Mock.addSession(cs);
 
-        SessionResource.setCardsSessionClass(Cards_Session_Mock.class);
+        SessionResource.setCardsSessionClass(new Cards_Session_Mock());
     }
 
     @Test

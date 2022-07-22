@@ -1,0 +1,25 @@
+<div (click)="setWriteMode(true)" (focusout)="setWriteMode(false)" class="card" [class.dark]="dark" [style.background-color]="data.color">
+  <div [hidden]="writemode" class="card-inner">
+
+    <div class="n_votes" [style.background-color]="data.color">
+
+      <span class="non-hidden-child">
+        {{ data.votes }}
+      </span>
+
+      <span (click)="vote_action($event)"  class="hidden-child">
+        {{ vote ? '-' : '+' }}
+      </span>
+    </div>
+
+
+
+    <img (click)="pickColor($event)" src="assets/icons/color_palette.svg" alt="color palette" class="icon color_palette">
+    <span class="card-text" contenteditable>{{ data.text }}</span>
+  </div>
+
+  <textarea [hidden]="!writemode" type="textarea" #card_text name="card_text" [defaultValue]="data.text" class="card-inner">
+  </textarea>
+
+</div>
+

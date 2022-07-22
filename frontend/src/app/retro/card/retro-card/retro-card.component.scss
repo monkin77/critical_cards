@@ -1,0 +1,100 @@
+.card {
+  padding: 4px;
+  margin: 2px;
+  margin-top: 15px;
+  min-width: 4em;
+  min-height: 4em;
+  position: relative;
+
+  cursor: text;
+
+  border: 2px solid #00000066;
+
+  .card-text {
+    margin: auto;
+    padding-left: 1em;
+    text-align: center;
+    word-wrap: break-word;
+    width: 100%;
+  }
+}
+
+.card:hover {
+  box-shadow: 5px 5px 5px #00000066;
+}
+
+
+.card.dark {
+  color: white;
+}
+
+.n_votes {
+  position: absolute;
+  top: -12.5px;
+  left: -12.5px;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid #00000066;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+
+  .hidden-child{
+    visibility: hidden;
+    grid-row: 1;
+    grid-column: 1;
+    font-weight: bold;
+    font-size: larger;
+    cursor: pointer;
+  }
+  .non-hidden-child{
+    visibility: visible;
+    grid-row: 1;
+    grid-column: 1;
+  }
+}
+
+.n_votes:hover {
+  .hidden-child {
+    visibility: visible;
+  }
+
+  .non-hidden-child {
+    visibility: hidden;
+  }
+}
+
+.dark .icon {
+  filter: invert(100%);
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+}
+
+textarea {
+  resize: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+}
+
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+.color_palette {
+  position: absolute;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+

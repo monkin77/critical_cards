@@ -1,4 +1,4 @@
-package com.criticalsoftware.resources;
+package com.criticalsoftware;
 
 import com.criticalsoftware.cards.entities.Cards_Session;
 import com.criticalsoftware.cards.resources.SessionResource;

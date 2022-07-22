@@ -1,4 +1,4 @@
-package com.criticalsoftware.resources;
+package com.criticalsoftware;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

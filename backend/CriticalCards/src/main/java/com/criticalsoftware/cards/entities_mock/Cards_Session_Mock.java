@@ -1,4 +1,4 @@
-package com.criticalsoftware.entities;
+package com.criticalsoftware.cards.entities_mock;
 
 import com.criticalsoftware.cards.entities.Cards_Session;
 import io.quarkus.test.Mock;

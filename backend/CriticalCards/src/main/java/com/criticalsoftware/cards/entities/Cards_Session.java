@@ -1,9 +1,11 @@
 package com.criticalsoftware.cards.entities;
 
+import com.criticalsoftware.cards.Entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Entity;
 import javax.ws.rs.NotFoundException;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,7 @@ public class Cards_Session extends PanacheEntity {
     }
 
     public static Cards_Session getRetro(long session) {
-        Optional<Cards_Session> retroOpt = Cards_Session.findByIdOptional(session);
+        Optional<Cards_Session> retroOpt = Entities.cards_session.findByIdOptional(session);
         if (!retroOpt.isPresent())
             return null;
         Cards_Session retro = retroOpt.get();

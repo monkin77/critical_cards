@@ -1,8 +1,9 @@
 package com.criticalsoftware;
 
+import com.criticalsoftware.cards.Entities;
 import com.criticalsoftware.cards.entities.Cards_Session;
 import com.criticalsoftware.cards.resources.SessionResource;
-import com.criticalsoftware.entities.Cards_Session_Mock;
+import com.criticalsoftware.cards.entities_mock.Cards_Session_Mock;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,12 +17,12 @@ public class SessionResourceTest {
 
     @BeforeAll
     public static void setup() {
+        Entities.testMode();
+
         cs = new Cards_Session();
         cs.session_type = "retro";
         cs.id = 0L;
         Cards_Session_Mock.addSession(cs);
-
-        SessionResource.setCardsSessionClass(new Cards_Session_Mock());
     }
 
     @Test

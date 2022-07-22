@@ -1,0 +1,19 @@
+h2 {
+    color: #000;
+    font-size: 1em;
+    font-family: "Lucida Handwriting Italic", cursive;
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container {
+    flex-direction: column;
+    padding-top: 8%;
+
+    .container-item {
+        background-color: #e6e6e6;
+        margin: 2%;
+    }
+}

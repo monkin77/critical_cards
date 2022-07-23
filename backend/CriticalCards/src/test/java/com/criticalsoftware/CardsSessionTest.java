@@ -1,7 +1,6 @@
 package com.criticalsoftware;
 
 import com.criticalsoftware.cards.entities.Cards_Session;
-import com.criticalsoftware.cards.entities.Retro_Lane;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

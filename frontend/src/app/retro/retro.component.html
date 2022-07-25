@@ -1,16 +1,7 @@
 <p>Here will be show Retro with session id: {{sessionId}}</p>
 
 <div class="lanes">
-  <app-retro-lane [lane-data]="lane_data1"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data2"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data3"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data4"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data1"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data2"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data3"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data4"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data1"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data2"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data3"></app-retro-lane>
-  <app-retro-lane [lane-data]="lane_data4"></app-retro-lane>
+  <ng-container *ngFor="let lane of session?.lanes">
+    <app-retro-lane [lane-data]="lane"></app-retro-lane>
+  </ng-container>
 </div>

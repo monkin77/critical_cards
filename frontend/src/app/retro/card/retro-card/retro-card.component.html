@@ -1,6 +1,6 @@
-<div (click)="setWriteMode(true)"  class="card" (focusout)="setWriteMode(false)" [class.dark]="dark" [style.background-color]="data.color">
-  <!-- (focusout)="setWriteMode(false)" -->
-  <div [hidden]="writemode" class="card-inner">
+<div class="card" (focusout)="setWriteMode(false)" [class.dark]="dark" [style.background-color]="data.color">
+
+  <div [hidden]="writemode" (click)="setWriteMode(true)"  class="card-inner main-content">
 
     <div class="n_votes" [style.background-color]="data.color">
 
@@ -19,9 +19,8 @@
     <span class="card-text" contenteditable>{{ data.text }}</span>
   </div>
 
-  <div [hidden]="!writemode" >
-    <textarea type="textarea" #card_text name="card_text" [defaultValue]="data.text" class="card-inner" (input)="edit_text($event)">
-    </textarea>
+  <div [hidden]="!writemode" class="card-inner">
+    <textarea type="textarea" #card_text name="card_text" [defaultValue]="data.text" (input)="edit_text($event)"></textarea>
     <img (click)="delete($event)" src="assets/icons/delete.svg" alt="delete card" class="icon delete_btt">
   </div>
 

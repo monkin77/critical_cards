@@ -14,12 +14,14 @@ export class RetroComponent implements OnInit {
   @Input() retroSession: RetroSession | null = null;
   cardsApi: CardsApiService;
   edit: boolean = false;
+  router: Router;
 
   constructor(
     route: ActivatedRoute,
     router: Router,
     cardsApi: CardsApiService
   ) {
+    this.router = router;
     this.sessionId = parseInt(route.snapshot.paramMap.get('id')!);
     if (this.sessionId == null) router.navigate(['pageNotFound']);
     else {
@@ -32,7 +34,7 @@ export class RetroComponent implements OnInit {
   ngOnInit(): void {}
 
   back() {
-    console.log('TODO, Should navigate back');
+    this.router.navigate([".."]);
   }
 
   addLane() {

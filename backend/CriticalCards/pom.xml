@@ -81,6 +81,10 @@
       <version>17.0.0</version>
       <scope>compile</scope>
     </dependency>
+      <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-test-common</artifactId>
+      </dependency>
   </dependencies>
   <build>
     <plugins>

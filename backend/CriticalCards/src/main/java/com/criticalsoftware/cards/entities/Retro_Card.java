@@ -26,4 +26,6 @@ public class Retro_Card extends PanacheEntity {
             return null;
         return retro;
     }
+
+
 }

@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Path("/session")
 public class SessionResource {
-
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)

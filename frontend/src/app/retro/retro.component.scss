@@ -4,13 +4,20 @@
     justify-content: space-between;
     // justify-content: center;
     align-items: center;
-    
+
     h2 {
         color: #000;
         font-size: 1em;
         font-family: "Lucida Handwriting Italic", cursive;
         text-align: center;
     }
+
+  h3 {
+    color: #000;
+    font-size: 1em;
+    font-family: "Lucida Handwriting Italic", cursive;
+    text-align: right;
+  }
 
     .add-button {
         display: inline-block;
@@ -19,27 +26,31 @@
         text-align: center;
         height: 100px;
         line-height: 100px;
-        text-align: center;
         background-color: #e6e6e6;
     }
-    
+
 }
 
 
 .icon {
-    height: 1.5em;
+    height: 0.9em;
 }
 
 .edit-icon {
     height: 0.6em;
 }
 
+.icon:hover {
+  cursor: pointer;
+}
+
 
 .container {
-    flex-direction: column;
-    padding-top: 8%;
+    padding-top: 3%;
     width: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: row;
 
     .container-item {
         background-color: #e6e6e6;

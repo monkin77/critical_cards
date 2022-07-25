@@ -1,6 +1,8 @@
 import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ColorService } from 'src/app/color.service';
 import { RetroCard } from 'src/app/DTOs/retro-card';
+import {HttpResponse} from "@angular/common/http";
+import {CardsApiService} from "../../../cards-api.service";
 
 @Component({
   selector: 'app-retro-card',
@@ -20,10 +22,11 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   public writemode = false;
 
   public vote = false;
+  public mutex_flag = false;
 
   private openedWriteMode = false;
 
-  constructor(private readonly colorService: ColorService) {}
+  constructor(private readonly colorService: ColorService,private apivote : CardsApiService) {}
 
   ngOnInit(): void {
     this.updateCardMode();
@@ -47,8 +50,19 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   public vote_action(event: MouseEvent): void {
     event.stopPropagation();
-  }
 
+    if (!this.mutex_flag) {
+      this.mutex_flag = true;
+
+    this.apivote.createVote({text:"New Text", color: "#ffffff"}, this.vote,this.data.id)
+      .subscribe((response: HttpResponse<any>) => {
+        if(response.ok) {
+          this.vote = !this.vote;
+        }
+        this.mutex_flag = false;
+      });
+    }
+  }
 
   updateCardMode(): void {
     const rgb = this.colorService.hexToRgb(this.data.color);

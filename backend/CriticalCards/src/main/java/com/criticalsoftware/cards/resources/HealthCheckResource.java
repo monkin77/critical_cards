@@ -10,7 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Path("health")
@@ -49,18 +51,25 @@ public class HealthCheckResource {
     @Path("metrics")
     @Produces(MediaType.APPLICATION_JSON)
     public Response metrics() {
-        final List<Cards_Session> sessions = Cards_Session.streamAll().limit(10).map(cs -> (Cards_Session) cs).collect(Collectors.toList());
-        int numSessions = sessions.size();
-
+        final List<Cards_Session> allSessions = Cards_Session.listAll();
+        int numSessions = Integer.min(10, allSessions.size());
         if (numSessions == 0)
             return Response.status(204).build();
 
+        List<Cards_Session> randomSessions = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < numSessions; i++) {
+            int chosenIdx = random.nextInt(allSessions.size());
+            Cards_Session removedSession = allSessions.remove(chosenIdx);
+            randomSessions.add(removedSession);
+        }
+
         long start = System.currentTimeMillis();
-        for (Cards_Session session : sessions) {
+        for (Cards_Session session : randomSessions) {
             Response res = new RetroResource().getRetro(session.id);
             if (res.getStatusInfo().getStatusCode() != 200)
                 return Response.status(500).entity("Error fetching Retro Resource with id: " + session.id + ".").build();
-            System.out.println("Session: " + session.id);
+            System.out.println("Session: " + session.id + " elapsed time: " + (System.currentTimeMillis() - start));
         }
         long end = System.currentTimeMillis();
 

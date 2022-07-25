@@ -22,6 +22,7 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   public writemode = false;
 
   public vote = false;
+  public mutex_flag = false;
 
   private openedWriteMode = false;
 
@@ -50,17 +51,19 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   public vote_action(event: MouseEvent): void {
     event.stopPropagation();
+
+    if (!this.mutex_flag) {
+      this.mutex_flag = true;
+
     this.apivote.createVote({text:"New Text", color: "#ffffff"}, this.vote,this.data.id)
       .subscribe((response: HttpResponse<any>) => {
-        if(response.ok){
-          this.vote = !this.vote; // !!!! mudar
-          console.log(this.vote);
+        if(response.ok) {
+          this.vote = !this.vote;
         }
-
+        this.mutex_flag = false;
       });
-
+    }
   }
-
 
   updateCardMode(): void {
     const rgb = this.colorService.hexToRgb(this.data.color);

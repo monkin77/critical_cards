@@ -23,7 +23,8 @@
   <textarea [hidden]="!writemode" type="textarea" #card_text name="card_text" [defaultValue]="data.text"
             class="card-inner">
   </textarea>
-  <app-color-picker #color_picker></app-color-picker>
+
+  <app-color-picker [color]="data.color" #color_picker></app-color-picker>
 
 </div>
 

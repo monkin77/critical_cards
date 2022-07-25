@@ -15,7 +15,7 @@ team members to participate in these remotely. Users can create and name lanes i
 sessions. Furthermore, users can add cards to the lanes, move the cards between lanes,
 and edit their content.
 
-[Main page](./docs/main_page.png)
+![Main page](./docs/main_page.png)
 
 ### Product Vision
 

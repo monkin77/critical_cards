@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RetroSession } from '../DTOs/retro-session';
 
@@ -9,7 +9,7 @@ import { RetroSession } from '../DTOs/retro-session';
 })
 export class RetroComponent implements OnInit {
   sessionId: String | null;
-  retroSession: RetroSession | null = null;
+  @Input() retroSession: RetroSession | null = null;
 
   constructor(route: ActivatedRoute, router: Router) {
     this.sessionId = route.snapshot.paramMap.get('id');

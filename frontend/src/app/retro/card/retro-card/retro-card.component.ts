@@ -30,7 +30,6 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   ngOnInit(): void {
     this.updateCardMode();
-    console.log(this.data.votes)
   }
 
   ngAfterViewChecked() {

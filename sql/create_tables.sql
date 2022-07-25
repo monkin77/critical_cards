@@ -1,7 +1,9 @@
+CREATE SEQUENCE hibernate_sequence START 1;
+
 CREATE TABLE IF NOT EXISTS cards_session (
   id BIGINT NOT null primary key,
   session_type varchar(10),
-  session_name varchar(100) NOT NULL
+  session_name varchar(100)
 );
 
 CREATE TABLE IF NOT EXISTS retro_lane (

@@ -1,20 +1,45 @@
 .header {
-    color: #000;
-    font-size: 1em;
-    font-family: "Lucida Handwriting Italic", cursive;
-    position: fixed;
-    top: 0%;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // justify-content: center;
+    align-items: center;
+    
+    h2 {
+        color: #000;
+        font-size: 1em;
+        font-family: "Lucida Handwriting Italic", cursive;
+        text-align: center;
+    }
+
+    .add-button {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+        text-align: center;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        background-color: #e6e6e6;
+    }
+    
+}
+
+
+.icon {
+    height: 1.5em;
 }
 
 .edit-icon {
     height: 0.6em;
 }
 
+
 .container {
     flex-direction: column;
     padding-top: 8%;
+    width: 100%;
+    overflow: auto;
 
     .container-item {
         background-color: #e6e6e6;

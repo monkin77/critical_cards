@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { RetroCardComponent } from './retro/card/retro-card/retro-card.component';
-import { RetroLaneComponent } from './retro-lane/retro-lane.component';
+import { RetroLaneComponent } from './retro/lane/retro-lane/retro-lane.component';
 
 @NgModule({
   declarations: [

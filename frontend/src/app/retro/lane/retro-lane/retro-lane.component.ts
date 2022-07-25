@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { RetroLane } from 'src/app/DTOs/retro-lane';
 
 @Component({
   selector: 'app-retro-lane',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RetroLaneComponent implements OnInit {
 
+  @Input("lane-data")
+  public data!: RetroLane;
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  // TODO pallete icon change color
 }

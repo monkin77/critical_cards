@@ -93,17 +93,19 @@ docker compose -f db.yml up
 **Note**: the database name and credentials are present on the [db.yml](./db.yml) and
 can be customized there.
 
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Contribution guidelines
 
-### Contribution guidelines ###
+### Tests
 
-* Writing tests
-* Code review
-* Other guidelines
+- As of writing, the frontend0s components aren't tested;
+- The backend functionalities are tested using JUnit5:
+    - The tests use the database and are _idempotent_.
+
+### Code review
+
+- Commits to _master_ aren't allowed;
+- Pull requests from _development_ branches to the _master_ branch should
+be reviewed and approved by members of other teams.
 
 ## Development teams
 

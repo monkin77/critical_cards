@@ -1,9 +1,7 @@
-CREATE SEQUENCE hibernate_sequence START 1;
-
 CREATE TABLE IF NOT EXISTS cards_session (
   id BIGINT NOT null primary key,
   session_type varchar(10),
-  session_name varchar(100)
+  session_name varchar(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS retro_lane (
@@ -64,7 +62,7 @@ BEGIN
   IF old_session = new_session THEN
     RETURN NEW;
   ELSE
-    RETURN OLD;
+    RAISE EXCEPTION 'Cannot move cards between sessions';
   END IF;
 END;
 $BODY$
@@ -100,13 +98,13 @@ BEGIN
 		VALUES (1, 'retro', 'Sprint 28 Retrospective');
 	END IF;
 
-  IF NOT EXISTS (SELECT * FROM retro_lane WHERE id = 1) THEN
+  IF NOT EXISTS (SELECT * FROM retro_lane WHERE id = 3) THEN
     INSERT INTO retro_lane(id, cards_session_id, retro_lane_name)
-    VALUES (1, 1, 'What went well');
+    VALUES (3, 1, 'What went well');
   END IF;
 
   IF NOT EXISTS (SELECT * FROM retro_card WHERE id = 1) THEN
     INSERT INTO retro_card(id, retro_lane_id, retro_card_text, retro_votes)
-    VALUES (1, 1, 'The coordination between teams greatly improved', 2);
+    VALUES (1, 3, 'The coordination between teams greatly improved', 2);
   END IF;
 END$$;

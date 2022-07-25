@@ -46,12 +46,65 @@ CREATE OR REPLACE TRIGGER default_lane
 	FOR EACH ROW 
 	WHEN (NEW.session_type = 'retro')
 	EXECUTE PROCEDURE insert_default_lane();
-	
+
+
+CREATE OR REPLACE FUNCTION detect_card_move_between_sessions() RETURNS TRIGGER AS
+$BODY$
+DECLARE old_session BIGINT;
+DECLARE new_session BIGINT;
+BEGIN
+  SELECT cards_session_id INTO old_session
+  FROM retro_lane WHERE id = OLD.retro_lane_id;
+
+  SELECT cards_session_id INTO new_session
+  FROM retro_lane WHERE id = NEW.retro_lane_id;
+
+  IF old_session = new_session THEN
+    RETURN NEW;
+  ELSE
+    RETURN OLD;
+  END IF;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER prevent_card_move_between_sessions
+  BEFORE UPDATE ON retro_card
+  FOR EACH ROW
+  WHEN (NEW.retro_lane_id <> OLD.retro_lane_id)
+  EXECUTE PROCEDURE detect_card_move_between_sessions();
+
+
 -- DEMO Retro
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT * FROM cards_session  WHERE id = 0) THEN
+  IF NOT EXISTS (SELECT * FROM cards_session  WHERE id = 0) THEN
 		INSERT INTO cards_session(id, session_type, session_name)
 		VALUES (0, 'retro', 'Demo Retrospective');
 	END IF;
-END$$;		
+
+  IF NOT EXISTS (SELECT * FROM retro_lane WHERE id = 0) THEN
+    INSERT INTO retro_lane(id, cards_session_id, retro_lane_name)
+    VALUES (0, 0, 'Demo Lane');
+  END IF;
+
+  IF NOT EXISTS (SELECT * FROM retro_card WHERE id = 0) THEN
+    INSERT INTO retro_card(id, retro_lane_id, retro_card_text, retro_votes)
+    VALUES (0, 0, 'Feedback text to provide feedback to stuff in the past', 8);
+  END IF;
+
+  IF NOT EXISTS (SELECT * FROM cards_session  WHERE id = 1) THEN
+		INSERT INTO cards_session(id, session_type, session_name)
+		VALUES (1, 'retro', 'Sprint 28 Retrospective');
+	END IF;
+
+  IF NOT EXISTS (SELECT * FROM retro_lane WHERE id = 1) THEN
+    INSERT INTO retro_lane(id, cards_session_id, retro_lane_name)
+    VALUES (1, 1, 'What went well');
+  END IF;
+
+  IF NOT EXISTS (SELECT * FROM retro_card WHERE id = 1) THEN
+    INSERT INTO retro_card(id, retro_lane_id, retro_card_text, retro_votes)
+    VALUES (1, 1, 'The coordination between teams greatly improved', 2);
+  END IF;
+END$$;

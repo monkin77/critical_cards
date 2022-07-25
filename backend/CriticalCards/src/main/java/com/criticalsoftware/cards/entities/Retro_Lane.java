@@ -5,6 +5,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import javax.persistence.Entity;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Entity
@@ -32,5 +33,18 @@ public class Retro_Lane extends PanacheEntity {
         if (laneOpt.isPresent())
             return laneOpt.get().cards_session_id;
         throw new NotFoundException();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() != obj.getClass())
+            return false;
+
+        Retro_Lane lane2 = (Retro_Lane) obj;
+
+        return this.cards_session_id == lane2.cards_session_id &&
+                Objects.equals(this.retro_lane_name, lane2.retro_lane_name) &&
+                this.retro_lane_color == lane2.retro_lane_color &&
+                this.id.equals(lane2.id);
     }
 }

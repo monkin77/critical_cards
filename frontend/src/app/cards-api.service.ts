@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import {SimpleSession} from "./DTOs/simple-session";
+import {SimpleRetroCard} from "./DTOs/simple-retro-card";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,13 @@ import {SimpleSession} from "./DTOs/simple-session";
 export class CardsApiService {
 
   constructor(private apiClient: HttpClient) {
+  }
+  createVote(data:SimpleRetroCard, bolvote: boolean,id: number) {
+    if(bolvote){
+      return this.apiClient.put<any>("http://localhost:8080/card/unvote/"+id, data,  {observe: 'response'});
+    } else {
+      return this.apiClient.put<any>("http://localhost:8080/card/vote/"+id, data,  {observe: 'response'});
+    }
   }
 
   createRetro(data: SimpleSession) {

@@ -36,4 +36,43 @@ public class RetroCardResource {
         }
     }
 
+    @PUT
+    @Path("vote/{cardId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addVote(@PathParam("cardId") long cardId){
+        Optional<Retro_Card> cardOpt = Retro_Card.findByIdOptional(cardId);
+        if (!cardOpt.isPresent())
+            return Response.status(404).build();
+        Retro_Card card = cardOpt.get();
+        card.retro_votes++;
+        card.persist();
+        try {
+            return ResourceHelper.getOkResponse(Retro_Lane.getSessionOfLane(card.retro_lane_id));
+        } catch (NotFoundException ex) {
+            return Response.status(405).build();
+        }
+    }
+
+    @PUT
+    @Path("unvote/{cardId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeVote(@PathParam("cardId") long cardId ){
+        Optional<Retro_Card> cardOpt = Retro_Card.findByIdOptional(cardId);
+        if (!cardOpt.isPresent())
+            return Response.status(404).build();
+        // metodo para deserializar o json
+        Retro_Card card = cardOpt.get();
+        if (card.retro_votes > 0 )
+            card.retro_votes--;
+        card.persist();
+        try {
+            return ResourceHelper.getOkResponse(Retro_Lane.getSessionOfLane(card.retro_lane_id));
+        } catch (NotFoundException ex) {
+            return Response.status(405).build();
+        }
+    }
 }

@@ -1,7 +1,9 @@
 <p>Here will be show Retro with session id: {{sessionId}}</p>
 
 <div class="lanes">
-  <ng-container *ngFor="let lane of session?.lanes">
-    <app-retro-lane [lane-data]="lane"></app-retro-lane>
-  </ng-container>
+  <div class="lanesContainer">
+    <ng-container *ngFor="let lane of session?.lanes">
+      <app-retro-lane [lane-data]="lane"></app-retro-lane>
+    </ng-container>
+  </div>
 </div>

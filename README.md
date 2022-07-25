@@ -110,7 +110,8 @@ be reviewed and approved by members of other teams.
 ## Development teams
 
 The project was developed by the following 4 teams managed using the
-[Kanban management system](https://kanbanize.com/kanban-resources/getting-started/what-is-kanban).
+[Kanban management system](https://kanbanize.com/kanban-resources/getting-started/what-is-kanban)
+in [Trello](https://trello.com).
 
 ### A Equipa
 

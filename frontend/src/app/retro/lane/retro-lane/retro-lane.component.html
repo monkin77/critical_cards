@@ -1,6 +1,7 @@
 <div class="lane" [class.dark]="dark" [style.background-color]="data.color">
-  <span class="lane-title">Lane Name : {{ data.name }}</span>
+  <span class="lane-title"> {{ '\< ' + (data.name ?? 'Lane') + ' \>'}} </span>
   <img
+    (click)="pickColor($event)"
     src="assets/icons/color_palette.svg"
     alt="color palette"
     class="icon color_palette"
@@ -12,4 +13,6 @@
   </ng-container>
 
   <button style="width: auto" (click)="add_card()">Add Card +</button>
+
+  <app-color-picker [color]="data.color" #color_picker></app-color-picker>
 </div>

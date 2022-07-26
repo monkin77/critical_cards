@@ -10,7 +10,6 @@
         font-family: "Lucida Handwriting Italic", cursive;
         text-align: center;
     }
-
 }
 
 .icon {
@@ -31,19 +30,6 @@
   cursor: pointer;
 }
 
-.container {
-    padding-top: 3%;
-    width: 100%;
-    overflow: auto;
-    display: flex;
-    flex-direction: row;
-
-    .container-item {
-        background-color: #e6e6e6;
-        margin: 2%;
-    }
-}
-
 /* Style buttons */
 .btn {
   background-color: #c01722;
@@ -56,5 +42,41 @@
 }
 
 .btn:hover {
-  background-color: #9c131c;
+  background-color: #dbc818;
 }
+
+.lanes {
+    padding: 1rem;
+    background-color: antiquewhite;
+
+    border: 0;
+    border-radius: 0;
+
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.lanesContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: center;
+
+    gap: 1rem;
+    cursor: grab;
+    overflow-x: scroll;
+}
+
+ /* Hide scrollbar for Chrome, Safari and Opera */
+ /* source: https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
+.lanesContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+/* source: https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
+.lanesContainer {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+} 

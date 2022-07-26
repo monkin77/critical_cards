@@ -8,6 +8,7 @@ import com.criticalsoftware.cards.entities.Retro_Card;
 import com.criticalsoftware.cards.entities.Retro_Lane;
 import com.criticalsoftware.cards.mappers.RetroMapper;
 
+import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -103,6 +104,8 @@ public class RetroLaneResource {
             return ResourceHelper.getOkResponse(sessionId);
         } catch (NotFoundException ex) {
             return Response.status(405).build();
+        } catch (PersistenceException pex) {
+            return Response.status(400, pex.getMessage()).build();
         }
     }
 }

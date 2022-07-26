@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, throwError, tap } from 'rxjs';
 import { SimpleSession } from './DTOs/simple-session';
 import { SimpleRetroCard } from './DTOs/simple-retro-card';
+import {SimpleRetroLane} from "./DTOs/simple-retro-lane";
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +56,13 @@ export class CardsApiService {
     return this.apiClient.get<any>('http://localhost:8080/retro/' + idSession, {
       observe: 'response',
     });
+  }
+
+  createLane(data: SimpleRetroLane, idSession: String | null) {
+    return this.apiClient.post<any>("http://localhost:8080/retro/"+idSession+"/lane/", data,  {observe: 'response'});
+  }
+
+  removeLane(idSession:String | null, idLane:String | null) {
+    return this.apiClient.delete<any>("http://localhost:8080/retro/"+idSession+"/lane/"+idLane,  {observe: 'response'});
   }
 }

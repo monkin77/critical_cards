@@ -1,7 +1,7 @@
 <div class="header">
     <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
     <h2 id="retrotitle" *ngIf="edit==false">
-        {{session!.name}}
+       {{session!.name}}
         <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
     </h2>
     <div *ngIf="edit==true">
@@ -9,7 +9,11 @@
         <img (click)="saveName()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
     </div>
 
-  <button style="width: auto">Add Lane + </button>
+  <div>
+    <input type="text" id="lanetext" name="lanetext" [(ngModel)]="lanetextInput">
+    <button (click)="addLane()" style="width: auto">Add Lane + </button>
+  </div>
+  <button (click)="removeLane()" style="width: auto">Remove Lane + </button>
 </div>
 
 <div class="lanes">

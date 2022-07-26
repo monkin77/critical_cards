@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { Subject, takeUntil } from 'rxjs';
 import { RetroLane } from 'src/app/DTOs/retro-lane';
@@ -7,6 +7,7 @@ import { RetroSession } from '../DTOs/retro-session';
 import { RetroSessionService } from '../retro-session.service';
 import { CardsApiService } from '../cards-api.service';
 import { HttpResponse } from '@angular/common/http';
+import {SimpleRetroLane} from "../DTOs/simple-retro-lane";
 
 @Component({
   selector: 'app-retro',
@@ -19,6 +20,9 @@ export class RetroComponent implements OnInit, OnDestroy {
   cardsApi: CardsApiService;
   edit: boolean = false;
   router: Router;
+  // Variables needed to add a lane
+  lanetextInput: String = "";
+  retroLane !: RetroLane;
 
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -56,7 +60,21 @@ export class RetroComponent implements OnInit, OnDestroy {
   }
 
   addLane() {
-    console.log('TODO, Should add lane');
+    const lane = {name: this.lanetextInput, color:  "#ffffff"};
+    this.retroLane = {id: -1, name: "", color: "#FFFFFF", cards: []};
+
+    this.cardsApi.createLane(lane, this.sessionId.toString()).subscribe(result => {
+      console.log(result);
+    })
+
+    this.retroLane.name  = lane.name;
+    this.retroLane.color = lane.color;
+
+    this.session?.lanes.push(this.retroLane);
+  }
+
+  removeLane() {
+    this.cardsApi.removeLane(this.sessionId.toString(),this.retroLane.id.toString())
   }
 
   editRetroName() {

@@ -1,4 +1,11 @@
-import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ColorService } from 'src/app/color.service';
 import { RetroCard } from 'src/app/DTOs/retro-card';
 import { HttpResponse } from "@angular/common/http";
@@ -9,15 +16,16 @@ import {ColorPickerComponent} from "../../../color-picker/color-picker.component
 @Component({
   selector: 'app-retro-card',
   templateUrl: './retro-card.component.html',
-  styleUrls: ['./retro-card.component.scss']
+  styleUrls: ['./retro-card.component.scss'],
 })
 export class RetroCardComponent implements AfterViewChecked, OnInit {
-
   @ViewChild('card_text')
   private textEdit!: ElementRef<HTMLInputElement>;
 
   @ViewChild('color_picker')
   private ColorPicker!: ColorPickerComponent;
+  @ViewChild('card')
+  private card!: ElementRef<HTMLInputElement>;
 
   @Input('data')
   public data!: RetroCard;
@@ -30,12 +38,16 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   private openedWriteMode = false;
 
-  constructor(private readonly colorService: ColorService, private apivote: CardsApiService, private retroComponent: RetroComponent) { }
+  constructor(
+    private readonly colorService: ColorService,
+    private apivote: CardsApiService,
+    private retroComponent: RetroComponent
+  ) {}
 
 
   ngOnInit(): void {
     this.updateCardMode();
-    localStorage.setItem("vote", this.vote.toString());
+    localStorage.setItem('vote', this.vote.toString());
   }
 
   ngAfterViewChecked() {
@@ -65,7 +77,12 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
     if (!this.mutex_flag) {
       this.mutex_flag = true;
-      this.apivote.createVote({ text: "New Text", color: "#ffffff" }, this.vote, this.data.id)
+      this.apivote
+        .createVote(
+          { text: 'New Text', color: '#ffffff' },
+          this.vote,
+          this.data.id
+        )
         .subscribe((response: HttpResponse<any>) => {
           if (response.ok) {
             this.vote = !this.vote;
@@ -78,12 +95,11 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   public delete(event: MouseEvent): void {
     event.stopPropagation();
+    this.card.nativeElement.remove();
   }
 
   updateCardMode(): void {
     const rgb = this.colorService.hexToRgb(this.data.color);
     this.dark = rgb ? this.colorService.perceptiveLuminance(rgb) < 0.5 : false;
   }
-
 }
-

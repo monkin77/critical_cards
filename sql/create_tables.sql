@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS retro_lane (
   id BIGSERIAL PRIMARY KEY,
   cards_session_id BIGINT NOT NULL,
   retro_lane_name varchar(50),
-  retro_lane_color INT DEFAULT 0 NOT NULL CHECK (retro_lane_color >= 0 AND retro_lane_color <= 16777215),
+  retro_lane_color INT DEFAULT 16577765 NOT NULL CHECK (retro_lane_color >= 0 AND retro_lane_color <= 16777215),
   CONSTRAINT fk_retro_lane_session
     FOREIGN KEY (cards_session_id)
   REFERENCES cards_session(id)

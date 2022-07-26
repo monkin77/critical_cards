@@ -6,11 +6,25 @@
     align-items: center;
     background-color: antiquewhite;
 
+    min-height: 80vh;
+
     padding: 1em;
-    width: 300px;
 
     border: 1px solid black;
-    border-radius: 0.5rem;
+    border-radius: 1em;
+    box-shadow: 3px 2px #11111166;
+}
+
+@media only screen and (max-width: 400px) {
+    .lane {
+        width: 200px;
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    .lane {
+        width: 300px;
+    }
 }
 
 .color_palette {

@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import { interval, Observable, Subject, take, takeUntil, timer } from 'rxjs';
-import { RetroLane } from 'src/app/DTOs/retro-lane';
-import { RetroCard } from '../DTOs/retro-card';
+import { ActivatedRoute, Router } from '@angular/router';
+import { interval, Subject, take, takeUntil } from 'rxjs';
 import { RetroSession } from '../DTOs/retro-session';
 import { RetroSessionService } from '../retro-session.service';
 import { CardsApiService } from '../cards-api.service';
@@ -11,9 +9,8 @@ import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-retro',
   templateUrl: './retro.component.html',
-  styleUrls: ['./retro.component.scss']
+  styleUrls: ['./retro.component.scss'],
 })
-
 export class RetroComponent implements OnInit, OnDestroy {
   sessionId: number;
   edit: boolean = false;
@@ -35,16 +32,17 @@ export class RetroComponent implements OnInit, OnDestroy {
   }
 
   private updateSessionData() {
-    this.retroSessionService.getSession(this.sessionId)
+    this.retroSessionService
+      .getSession(this.sessionId)
       .pipe(take(1))
-      .subscribe( {
+      .subscribe({
         next: (session: RetroSession) => {
           this.session = session;
         },
         error: (err: any) => {
           this.router.navigate(['pageNotFound']);
-        }
-    });
+        },
+      });
   }
 
   ngOnInit(): void {
@@ -60,7 +58,7 @@ export class RetroComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.router.navigate([".."]);
+    this.router.navigate(['..']);
   }
 
   addLane() {

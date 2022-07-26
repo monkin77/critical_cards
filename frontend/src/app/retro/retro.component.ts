@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { RetroLane } from 'src/app/DTOs/retro-lane';
 import { RetroCard } from '../DTOs/retro-card';
@@ -11,15 +11,13 @@ import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-retro',
   templateUrl: './retro.component.html',
-  styleUrls: ['./retro.component.scss']
+  styleUrls: ['./retro.component.scss'],
 })
-
 export class RetroComponent implements OnInit, OnDestroy {
   sessionId: number;
   cardsApi: CardsApiService;
   edit: boolean = false;
   router: Router;
-
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -38,12 +36,13 @@ export class RetroComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.retroSessionService.getSessions()
+    this.retroSessionService
+      .getSessions()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((session: RetroSession) => {
         this.session = session;
         console.log(this.session);
-      })
+      });
   }
 
   ngOnDestroy(): void {
@@ -52,7 +51,7 @@ export class RetroComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.router.navigate([".."]);
+    this.router.navigate(['..']);
   }
 
   addLane() {

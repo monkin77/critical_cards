@@ -1,12 +1,9 @@
-
-
-<div class="lane"  [style.background-color]="data.color">
-    <span>Lane Name :  {{data.name}}</span>
+<div class="lane" [class.dark]="dark" [style.background-color]="data.color">
+    <span class="lane-title">Lane Name :  {{data.name}}</span>
     <img  src="assets/icons/color_palette.svg" alt="color palette" class="icon color_palette">
     <!-- (click)="pickColor($event)" -->
 
     <ng-container *ngFor= " let card of data.cards">
         <app-retro-card [data]="card"></app-retro-card>
     </ng-container>
-
 </div>

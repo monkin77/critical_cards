@@ -15,6 +15,10 @@
     box-shadow: 3px 2px #11111166;
 }
 
+.lane.dark .lane-title {
+    color: white !important;
+}
+
 @media only screen and (max-width: 400px) {
     .lane {
         width: 200px;

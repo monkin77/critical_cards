@@ -17,6 +17,10 @@ export class CardsApiService {
   get Refreshrequired(){
     return this._refreshrequired;
   }
+  updateRetro(id: number, data: SimpleSession) {
+    let link = "http://localhost:8080/retro/" + id;
+    return this.apiClient.put<any>(link, data, {observe: 'response'});
+  }
 
   createRetro(data:SimpleSession) {
     return this.apiClient.post<any>("http://localhost:8080/retro", data,  {observe: 'response'});
@@ -34,7 +38,7 @@ export class CardsApiService {
         tap(()=> {
           this.Refreshrequired.next();
         })
-      );;
+      );
     }
   }
 

@@ -72,3 +72,4 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   }
 
 }
+

@@ -1,5 +1,21 @@
-<p>Here will be show Retro with session id: {{sessionId}}</p>
+<div class="header">
+  <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
+  <h2 id="retrotitle" *ngIf="edit==false">{{retroSession!.name}}
+    <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
+  </h2>
+  <div *ngIf="edit==true">
+    <input type="text" id="inputbox" name="inputbox" [(ngModel)]="retroSession!.name">
+    <img (click)="savename()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
+  </div>
 
-<div *ngFor="let card of cards$" style="display: flex; flex-direction: column; width: 20em; border: 2px solid black; padding: 1em; margin: auto;">
-  <app-retro-card [data]="{id: card.id, text: card.text, color: '#b61b23', votes: card.votes}"></app-retro-card>
+  <button style="width: auto">Add Lane + </button>
+
+</div>
+
+<div class="container">
+    <span class="container-item" *ngFor='let in of [0,1,2,3,4,5,6,7,8]'>
+      <div *ngFor="let card of cards$" style="display: flex; flex-direction: column; width: 20em; border: 2px solid black; padding: 1em; margin: auto;">
+          <app-retro-card [data]="{id: card.id, text: card.text, color: '#b61b23', votes: card.votes}"></app-retro-card>
+      </div>
+    </span>
 </div>

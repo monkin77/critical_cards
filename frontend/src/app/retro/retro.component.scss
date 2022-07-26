@@ -1,0 +1,60 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        color: #000;
+        font-size: 1.5em;
+        font-family: "Lucida Handwriting Italic", cursive;
+        text-align: center;
+    }
+
+}
+
+.icon {
+  margin-left: 6px;
+  height: 1em;
+}
+
+.edit-icon {
+    height: 0.6em;
+}
+
+.save-icon {
+  height: 1.5em;
+  position: fixed;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.container {
+    padding-top: 3%;
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+
+    .container-item {
+        background-color: #e6e6e6;
+        margin: 2%;
+    }
+}
+
+/* Style buttons */
+.btn {
+  background-color: #c01722;
+  border: none;
+  color: white;
+  margin-top: -6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #9c131c;
+}

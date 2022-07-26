@@ -1,8 +1,26 @@
-<p>Here will be show Retro with session id: {{sessionId}}</p>
+<div class="header">
+    <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
+    <h2 id="retrotitle" *ngIf="edit==false">{{retroSession!.name}}
+        <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
+    </h2>
+    <div *ngIf="edit==true">
+        <input type="text" id="inputbox" name="inputbox" [(ngModel)]="retroSession!.name">
+        <img (click)="savename()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
+    </div>
 
-<div style="display: flex; flex-direction: column; width: 20em; border: 2px solid black; padding: 1em; margin: auto;">
-  <app-retro-card [data]="{id: 0, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', color: '#b61b23', votes: 0}"></app-retro-card>
-  <app-retro-card [data]="{id: 1, text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', color: '#ffffff', votes: 2}"></app-retro-card>
-  <app-retro-card [data]="{id: 2, text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', color: '#00ffff', votes: 4}"></app-retro-card>
-  <app-retro-card [data]="{id: 3, text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', color: '#00b612', votes: 6}"></app-retro-card>
+  <button style="width: auto">Add Lane + </button>
+
 </div>
+
+<div class="container">
+    <span class="container-item" *ngFor='let in of [0,1,2,3,4,5,6,7,8]'>
+        
+        <div style="display: flex; flex-direction: column; width: 20em; border: 2px solid black; padding: 1em; margin: auto;">
+            <app-retro-card [data]="{id: 0, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', color: '#b61b23', votes: 0}"></app-retro-card>
+            <app-retro-card [data]="{id: 1, text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', color: '#ffffff', votes: 2}"></app-retro-card>
+            <app-retro-card [data]="{id: 2, text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', color: '#00ffff', votes: 4}"></app-retro-card>
+            <app-retro-card [data]="{id: 3, text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', color: '#00b612', votes: 6}"></app-retro-card>
+          </div>
+    </span>
+</div>
+

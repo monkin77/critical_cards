@@ -1,6 +1,5 @@
-<div (click)="setWriteMode(true)" (focusout)="setWriteMode(false)" class="card" [class.dark]="dark"
-     [style.background-color]="data.color">
-  <div [hidden]="writemode" class="card-inner">
+<div class="card" (focusout)="setWriteMode(false)" [class.dark]="dark" [style.background-color]="data.color">
+  <div [hidden]="writemode" (click)="setWriteMode(true)"  class="card-inner main-content">
 
     <div class="n_votes" [style.background-color]="data.color">
 
@@ -13,16 +12,14 @@
       </span>
     </div>
 
-
-    <img (click)="pickColor($event)" src="assets/icons/color_palette.svg" alt="color palette"
-         class="icon color_palette">
-
-    <span class="card-text" contenteditable>{{ data.text }}</span>
+    <img (click)="pickColor($event)" src="assets/icons/color_palette.svg" alt="color palette" class="icon color_palette">
+    <span class="card-text" >{{ data.text }}</span>
   </div>
 
-  <textarea [hidden]="!writemode" type="textarea" #card_text name="card_text" [defaultValue]="data.text"
-            class="card-inner">
-  </textarea>
+  <div [hidden]="!writemode" class="card-inner">
+    <textarea type="textarea" #card_text name="card_text" [defaultValue]="data.text" (change)="edit_text($event)"></textarea>
+    <img (click)="delete($event)" src="assets/icons/delete.svg" alt="delete card" class="icon delete_btt">
+  </div>
 
   <app-color-picker [color]="data.color" #color_picker></app-color-picker>
 

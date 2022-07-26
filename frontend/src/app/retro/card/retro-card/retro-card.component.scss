@@ -49,7 +49,7 @@
   align-items: center;
   justify-content: center;
 
-  .hidden-child{
+  .hidden-child {
     visibility: hidden;
     grid-row: 1;
     grid-column: 1;
@@ -57,7 +57,7 @@
     font-size: larger;
     cursor: pointer;
   }
-  .non-hidden-child{
+  .non-hidden-child {
     visibility: visible;
     grid-row: 1;
     grid-column: 1;
@@ -84,7 +84,6 @@
 
 .card-inner {
   width: 100%;
-  height: 100%;
 }
 
 textarea {
@@ -121,4 +120,3 @@ textarea:focus {
   height: 20px;
   cursor: pointer;
 }
-

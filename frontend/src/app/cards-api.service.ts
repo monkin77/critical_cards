@@ -52,17 +52,33 @@ export class CardsApiService {
     }
   }
 
-  getAllData(idSession: String | null) {
-    return this.apiClient.get<any>('http://localhost:8080/retro/' + idSession, {
+  getAllData(idSession: String) {
+    return this.apiClient.get<any>(`http://localhost:8080/retro/${idSession}`, {observe: 'response'});
+  }
+
+  createLane(data: SimpleRetroLane, idSession: String) {
+    return this.apiClient.post<any>(`http://localhost:8080/retro/${idSession}/lane/`, data,  {observe: 'response'});
+  }
+
+  removeLane(idSession:String | null, idLane:String) {
+    return this.apiClient.delete<any>(`http://localhost:8080/retro/${idSession}/lane/${idLane}`,  {observe: 'response'});
+  }
+
+  createCard(data: SimpleRetroCard, idSession: number, idLane: number) {
+    console.log(`http://localhost:8080/retro/${idSession}/lane/${idLane}/card`)
+    return this.apiClient.post<any>(`http://localhost:8080/retro/${idSession}/lane/${idLane}/card`, data,  {observe: 'response'});
+  }
+
+  updateTextCard(data: SimpleRetroCard, id:number) {
+    console.log("update card")
+    return this.apiClient
+    .put<any>('http://localhost:8080/card/' + id, data, {
       observe: 'response',
-    });
-  }
-
-  createLane(data: SimpleRetroLane, idSession: String | null) {
-    return this.apiClient.post<any>("http://localhost:8080/retro/"+idSession+"/lane/", data,  {observe: 'response'});
-  }
-
-  removeLane(idSession:String | null, idLane:String | null) {
-    return this.apiClient.delete<any>("http://localhost:8080/retro/"+idSession+"/lane/"+idLane,  {observe: 'response'});
+    })
+    .pipe(
+      tap(() => {
+        this.Refreshrequired.next();
+      })
+    );
   }
 }

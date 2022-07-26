@@ -11,6 +11,7 @@ import { RetroCard } from 'src/app/DTOs/retro-card';
 import { HttpResponse } from "@angular/common/http";
 import { CardsApiService } from "../../../cards-api.service";
 import {ColorPickerComponent} from "../../../color-picker/color-picker.component";
+import { SimpleRetroCard } from 'src/app/DTOs/simple-retro-card';
 
 @Component({
   selector: 'app-retro-card',
@@ -64,6 +65,9 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   public edit_text(event: Event): void {
     event.stopPropagation();
     this.data.text = this.textEdit.nativeElement.value;
+
+    let edit_data : SimpleRetroCard = {text: this.data.text, color: this.data.color}
+    this.apivote.updateTextCard(edit_data,this.data.id)
   }
 
   public pickColor(event: MouseEvent): void {

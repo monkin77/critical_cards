@@ -23,4 +23,15 @@ export class RetroLaneComponent implements OnInit {
     const rgb = this.colorService.hexToRgb(this.data.color);
     this.dark = rgb ? this.colorService.perceptiveLuminance(rgb) < 0.5 : false;
   }
+
+  add_card() {
+    let card = {
+      id: this.data.cards.length + 1,
+      text: 'text',
+      color: '#c01722',
+      votes: 0,
+    };
+
+    this.data.cards.push(card);
+  }
 }

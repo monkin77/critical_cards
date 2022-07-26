@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { RetroLane } from 'src/app/DTOs/retro-lane';
-import { RetroCard } from '../DTOs/retro-card';
 import { RetroSession } from '../DTOs/retro-session';
 import { RetroSessionService } from '../retro-session.service';
 import { CardsApiService } from '../cards-api.service';
@@ -15,9 +13,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class RetroComponent implements OnInit, OnDestroy {
   sessionId: number;
-  cardsApi: CardsApiService;
   edit: boolean = false;
-  router: Router;
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -25,8 +21,8 @@ export class RetroComponent implements OnInit, OnDestroy {
 
   constructor(
     route: ActivatedRoute,
-    router: Router,
-    cardsApi: CardsApiService,
+    private router: Router,
+    private cardsApi: CardsApiService,
     private retroSessionService: RetroSessionService
   ) {
     this.router = router;
@@ -37,11 +33,15 @@ export class RetroComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retroSessionService
-      .getSessions()
+      .getSession(this.sessionId)
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((session: RetroSession) => {
-        this.session = session;
-        console.log(this.session);
+      .subscribe({
+        next: (session: RetroSession) => {
+          this.session = session;
+        },
+        error: (err: any) => {
+          this.router.navigate(['pageNotFound']);
+        },
       });
   }
 
@@ -54,8 +54,15 @@ export class RetroComponent implements OnInit, OnDestroy {
     this.router.navigate(['..']);
   }
 
-  addLane() {
-    console.log('TODO, Should add lane');
+  add_lane() {
+    let lane = {
+      id: this.session!.lanes.length,
+      name: 'lane name',
+      color: '#ffffff',
+      cards: [],
+    };
+
+    this.session?.lanes.push(lane);
   }
 
   editRetroName() {

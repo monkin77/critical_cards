@@ -29,6 +29,14 @@ export class SplashComponent implements OnInit {
     //not implemented yet
   }
 
+  openmodal() {
+    document.getElementById("helpmodal")!.style.display = "block";
+  }
+
+  closemodal() {
+    document.getElementById("helpmodal")!.style.display = "none";
+  }
+
   newRetro() {
     this.cardsApi.createRetro({name:"New Retrospective"})
       .subscribe((response: HttpResponse<any>) => {
@@ -47,7 +55,7 @@ export class SplashComponent implements OnInit {
     this.router.navigate(['retro/'+id]);
   }
 }
-export enum Mode{
+export enum Mode {
   MAIN,
   NEW,
   JOIN

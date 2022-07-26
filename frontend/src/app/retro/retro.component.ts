@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+<<<<<<< HEAD
 import { interval, Subject, take, takeUntil } from 'rxjs';
+=======
+import { Subject, takeUntil } from 'rxjs';
+>>>>>>> dia4-feup
 import { RetroSession } from '../DTOs/retro-session';
 import { RetroSessionService } from '../retro-session.service';
 import { CardsApiService } from '../cards-api.service';
@@ -61,8 +65,15 @@ export class RetroComponent implements OnInit, OnDestroy {
     this.router.navigate(['..']);
   }
 
-  addLane() {
-    console.log('TODO, Should add lane');
+  add_lane() {
+    let lane = {
+      id: this.session!.lanes.length,
+      name: 'lane name',
+      color: '#ffffff',
+      cards: [],
+    };
+
+    this.session?.lanes.push(lane);
   }
 
   editRetroName() {

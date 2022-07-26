@@ -40,8 +40,7 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   constructor(
     private readonly colorService: ColorService,
-    private apivote: CardsApiService,
-    private retroComponent: RetroComponent
+    private apivote: CardsApiService
   ) {}
 
 
@@ -69,6 +68,7 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   public pickColor(event: MouseEvent): void {
     this.data.color = this.ColorPicker.show();
+    this.updateCardMode();
     event.stopPropagation();
   }
 

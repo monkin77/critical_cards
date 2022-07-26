@@ -1,8 +1,9 @@
-:host {
-  display: block;
+.color-picker.shown {
   width: 316px;
   padding: 16px;
+  position: absolute;
 }
+
 .color-wrapper {
   display: flex;
   height: 250px;
@@ -39,5 +40,4 @@
  border-color: dimgrey;
  margin-right: -2cm;
  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
-
 }

@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ColorService } from '../color.service';
 
 
@@ -31,21 +31,8 @@ export class ColorPickerComponent implements OnInit {
     this.color = String(rgba_str);
   }
 
-  public pickColor(event: MouseEvent) {
-   event.stopPropagation();
-  }
-
   public show() {
-    let str = this.color;
-    console.log(str);
     this.visible = !this.visible;
-
-    if(this.visible){
-      this.colorPicker.nativeElement.style.display = "block";
-    }
-    else{
-      this.colorPicker.nativeElement.style.display = "none";
-    }
 
     return this.rgba2hex(this.color);
   }

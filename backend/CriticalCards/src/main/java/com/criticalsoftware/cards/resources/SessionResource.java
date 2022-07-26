@@ -23,5 +23,4 @@ public class SessionResource {
         URI uri = UriBuilder.fromPath(session.get().session_type + "/" + id).build();
         return Response.status(302).location(uri).build();
     }
-
 }

@@ -53,7 +53,7 @@ export class RetroComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateSessionData();
-    interval(5000)
+    interval(10000)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.updateSessionData());
   }

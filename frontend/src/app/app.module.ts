@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ColorPickerModule } from './color-picker/color-picker.module';
 
 import { AppComponent } from './app.component';
 import { SplashComponent } from './splash/splash.component';
@@ -27,6 +28,7 @@ import { RetroLaneComponent } from './retro/lane/retro-lane/retro-lane.component
   imports: [
     BrowserModule,
     HttpClientModule,
+    ColorPickerModule,
     RouterModule.forRoot([
       {path: '', component: SplashComponent, title: 'Critical Cards'},
       {path: 'poker', component: PokerComponent, title: 'Critical Cards - Planning Poker'},

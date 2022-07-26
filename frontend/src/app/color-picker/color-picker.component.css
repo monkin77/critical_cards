@@ -29,4 +29,15 @@
   flex: 1;
   font-family: 'Helvetica';
   line-height: 32px;
+  color: black;
+}
+
+.color-picker {
+ background:white;
+ padding: 1cm;
+ border-style: solid;
+ border-color: dimgrey;
+ margin-right: -2cm;
+ box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+
 }

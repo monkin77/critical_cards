@@ -13,70 +13,58 @@ export class ColorPaletteComponent implements AfterViewInit, OnChanges {
   color: EventEmitter<string> = new EventEmitter(true);
 
   @ViewChild('canvas')
-  canvas: ElementRef<HTMLCanvasElement> | null = null;
+  canvas?: ElementRef<HTMLCanvasElement>;
 
   private ctx: CanvasRenderingContext2D | null = null;
 
   private mousedown: boolean = false;
 
-  public selectedPosition: { x: number; y: number } | null = null;
+  public selectedPosition?: { x: number; y: number };
 
   ngAfterViewInit() {
     this.draw();
   }
 
   draw() {
+    if (!this.canvas)
+      return;
+    
     if (!this.ctx) {
-      // @ts-ignore
       this.ctx = this.canvas.nativeElement.getContext('2d');
     }
-    // @ts-ignore
+
+    if (!this.ctx)
+      return;
+
     const width = this.canvas.nativeElement.width;
-    // @ts-ignore
     const height = this.canvas.nativeElement.height;
 
-    // @ts-ignore
     this.ctx.fillStyle = this.hue || 'rgba(255,255,255,1)';
-    // @ts-ignore
     this.ctx.fillRect(0, 0, width, height);
 
-    // @ts-ignore
     const whiteGrad = this.ctx.createLinearGradient(0, 0, width, 0);
     whiteGrad.addColorStop(0, 'rgba(255,255,255,1)');
     whiteGrad.addColorStop(1, 'rgba(255,255,255,0)');
-    // @ts-ignore
     this.ctx.fillStyle = whiteGrad;
-    // @ts-ignore
     this.ctx.fillRect(0, 0, width, height);
-    // @ts-ignore
     const blackGrad = this.ctx.createLinearGradient(0, 0, 0, height);
     blackGrad.addColorStop(0, 'rgba(0,0,0,0)');
     blackGrad.addColorStop(1, 'rgba(0,0,0,1)');
-    // @ts-ignore
     this.ctx.fillStyle = blackGrad;
-    // @ts-ignore
     this.ctx.fillRect(0, 0, width, height);
 
     if (this.selectedPosition) {
-      // @ts-ignore
       this.ctx.strokeStyle = 'white';
-      // @ts-ignore
 
       this.ctx.fillStyle = 'white';
-      // @ts-ignore
 
       this.ctx.beginPath();
-      // @ts-ignore
 
       this.ctx.arc(this.selectedPosition.x, this.selectedPosition.y, 10, 0, 2 * Math.PI);
-      // @ts-ignore
 
       this.ctx.lineWidth = 5;
-      // @ts-ignore
 
       this.ctx.stroke();
-      // @ts-ignore
-
     }
   }
 

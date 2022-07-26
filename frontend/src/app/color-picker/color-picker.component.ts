@@ -9,6 +9,9 @@ import { ColorService } from '../color.service';
 })
 export class ColorPickerComponent implements OnInit {
 
+  @ViewChild("colorpicker")
+  public colorPicker!: ElementRef<HTMLDivElement>;
+
   @Input("color")
   public hex: String = "#ff0000";
 
@@ -31,6 +34,14 @@ export class ColorPickerComponent implements OnInit {
     let str = this.color;
     console.log(str);
     this.visible = !this.visible;
+
+    if(this.visible){
+      this.colorPicker.nativeElement.style.display = "block";
+    }
+    else{
+      this.colorPicker.nativeElement.style.display = "none";
+    }
+
     return this.rgba2hex(this.color);
   }
 

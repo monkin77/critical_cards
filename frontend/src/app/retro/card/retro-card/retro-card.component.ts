@@ -30,7 +30,7 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   private openedWriteMode = false;
 
-  constructor(private readonly colorService: ColorService,private apivote : CardsApiService) {}
+  constructor(private readonly colorService: ColorService, private apivote : CardsApiService) {}
 
   ngOnInit(): void {
     this.updateCardMode();

@@ -55,8 +55,15 @@ export class RetroComponent implements OnInit, OnDestroy {
     this.router.navigate([".."]);
   }
 
-  addLane() {
-    console.log('TODO, Should add lane');
+  add_lane() {
+    let lane = {
+      id : this.session!.lanes.length,
+      name :"lane name",
+      color : "#ffffff",
+      cards : []
+    }
+    
+    this.session?.lanes.push(lane);
   }
 
   editRetroName() {

@@ -49,7 +49,7 @@ public class RetroCardResource {
         card.retro_votes++;
         card.persist();
         try {
-            return ResourceHelper.getOkResponse(Retro_Lane.getSessionOfLane(card.retro_lane_id));
+            return Response.ok().entity("{\"votes\":\"" + card.retro_votes + "\"}").build();
         } catch (NotFoundException ex) {
             return Response.status(405).build();
         }
@@ -70,7 +70,7 @@ public class RetroCardResource {
             card.retro_votes--;
         card.persist();
         try {
-            return ResourceHelper.getOkResponse(Retro_Lane.getSessionOfLane(card.retro_lane_id));
+            return Response.ok().entity("{\"votes\":\"" + card.retro_votes + "\"}").build();
         } catch (NotFoundException ex) {
             return Response.status(405).build();
         }

@@ -15,6 +15,9 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   @ViewChild('card_text')
   private textEdit!: ElementRef<HTMLInputElement>;
 
+  @ViewChild('card')
+  private card!: ElementRef<HTMLInputElement>;
+
   @Input('data')
   public data!: RetroCard;
 
@@ -72,6 +75,7 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
 
   public delete(event: MouseEvent): void {
     event.stopPropagation();
+    this.card.nativeElement.remove();
   }
 
   updateCardMode(): void {

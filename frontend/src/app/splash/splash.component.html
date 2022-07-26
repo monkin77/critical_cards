@@ -3,7 +3,7 @@
   <div class="button-tray">
     <button [disabled]="!isMain() && mode!=1" (click)="mode=1"> new </button>
     <button class="alternative" [disabled]="!isMain() && mode!=2" (click)="mode=2"> join </button>
-    <button class="info"> help </button>
+    <button class="info" (click)="openmodal()"> help </button>
   </div>
   <div class="button-tray" *ngIf="mode==1">
     <button class="affirmative" (click)="newPoker()"> poker </button>
@@ -18,6 +18,17 @@
         <button (click)="mode=0"> cancel </button>
       </div>
     </div>
+  </div>
+
+</div>
+
+<div id="helpmodal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="closemodal()">&times;</span>
+    <p>ssssssssssssssssssss</p>
+    <p>sssdesssssssdededessssssss</p>
   </div>
 
 </div>

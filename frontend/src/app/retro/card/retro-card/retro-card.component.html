@@ -1,4 +1,5 @@
 <div class="card" (focusout)="setWriteMode(false)" [class.dark]="dark" [style.background-color]="data.color">
+
   <div [hidden]="writemode" (click)="setWriteMode(true)"  class="card-inner main-content">
 
     <div class="n_votes" [style.background-color]="data.color">

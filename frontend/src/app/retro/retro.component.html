@@ -19,7 +19,7 @@
 <div class="lanes">
   <div class="lanesContainer">
     <ng-container *ngFor="let lane of session?.lanes">
-      <app-retro-lane [lane-data]=lane></app-retro-lane>
+      <app-retro-lane [lane-data]=lane [sessionId]=sessionId></app-retro-lane>
     </ng-container>
   </div>
 </div>

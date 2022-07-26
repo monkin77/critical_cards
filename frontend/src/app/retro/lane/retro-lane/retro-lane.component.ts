@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RetroLane } from 'src/app/DTOs/retro-lane';
 import { ColorService } from 'src/app/color.service';
 import { ColorPickerComponent } from 'src/app/color-picker/color-picker.component';
+import { CardsApiService } from 'src/app/cards-api.service';
 
 @Component({
   selector: 'app-retro-lane',
@@ -16,9 +17,15 @@ export class RetroLaneComponent implements OnInit {
   @Input('lane-data')
   public data!: RetroLane;
 
+  @Input('sessionId')
+  public sessionId!: number;
+
   public dark = false;
 
-  constructor(private readonly colorService: ColorService) {}
+  constructor(
+    private readonly colorService: ColorService,
+    private cardsApi: CardsApiService,
+    ) {}
 
   ngOnInit(): void {
     this.updateLaneMode();
@@ -29,15 +36,11 @@ export class RetroLaneComponent implements OnInit {
     this.dark = rgb ? this.colorService.perceptiveLuminance(rgb) < 0.5 : false;
   }
 
-  add_card() {
-    let card = {
-      id: this.data.cards.length + 1,
-      text: 'text',
-      color: '#c01722',
-      votes: 0,
-    };
+  addCard() {
+    const card = { text: 'Write here', color: '#c01722' };
+    this.data.cards.push(Object.assign({}, card, { id: -1, votes: 0 }));
 
-    this.data.cards.push(card);
+    this.cardsApi.createCard(card, this.sessionId, this.data.id);
   }
 
   public pickColor(event: MouseEvent): void {

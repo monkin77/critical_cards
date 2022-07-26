@@ -10,7 +10,6 @@ import { ColorService } from 'src/app/color.service';
 import { RetroCard } from 'src/app/DTOs/retro-card';
 import { HttpResponse } from "@angular/common/http";
 import { CardsApiService } from "../../../cards-api.service";
-import { RetroComponent } from "../../retro.component";
 import {ColorPickerComponent} from "../../../color-picker/color-picker.component";
 
 @Component({
@@ -23,7 +22,8 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   private textEdit!: ElementRef<HTMLInputElement>;
 
   @ViewChild('color_picker')
-  private ColorPicker!: ColorPickerComponent;
+  private colorPicker!: ColorPickerComponent;
+
   @ViewChild('card')
   private card!: ElementRef<HTMLInputElement>;
 
@@ -67,7 +67,7 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   }
 
   public pickColor(event: MouseEvent): void {
-    this.data.color = this.ColorPicker.show();
+    this.data.color = this.colorPicker.show();
     this.updateCardMode();
     event.stopPropagation();
   }

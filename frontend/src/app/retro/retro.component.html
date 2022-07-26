@@ -1,11 +1,11 @@
 <div class="header">
     <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
     <h2 id="retrotitle" *ngIf="edit==false">
-       {{session!.name}}
+        {{session?.name}}
         <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
     </h2>
     <div *ngIf="edit==true">
-        <input type="text" id="inputbox" name="inputbox" [(ngModel)]="session!.name">
+        <input type="text" id="inputbox" name="inputbox" [(ngModel)]="session!.name"> <!-- TODO: Fix this -->
         <img (click)="saveName()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
     </div>
 

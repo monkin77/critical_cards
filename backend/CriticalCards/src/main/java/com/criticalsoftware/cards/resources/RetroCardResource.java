@@ -4,6 +4,10 @@ import com.criticalsoftware.cards.Color;
 import com.criticalsoftware.cards.dtos.SimpleCardDTO;
 import com.criticalsoftware.cards.entities.Retro_Card;
 import com.criticalsoftware.cards.entities.Retro_Lane;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -19,6 +23,14 @@ public class RetroCardResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+    @Operation(summary = "Updates a Card", description = "Changes a Card's text and color if the received properties are not null")
+    @APIResponses(
+            value = {
+                    @APIResponse(responseCode = "200", description = "Success"),
+                    @APIResponse(responseCode = "404", description = "Unable to find the card with the given cardId"),
+                    @APIResponse(responseCode = "405")
+            }
+    )
     public Response updateCard(@PathParam("cardId") long cardId, SimpleCardDTO data) {
         Optional<Retro_Card> cardOpt = Retro_Card.findByIdOptional(cardId);
         if (!cardOpt.isPresent())
@@ -41,6 +53,14 @@ public class RetroCardResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+    @Operation(summary = "Adds a vote to a Card", description = "Increments the number of votes in a card by 1")
+    @APIResponses(
+            value = {
+                    @APIResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json", example = "{votes: 4}")),
+                    @APIResponse(responseCode = "404", description = "Unable to find the card with the given cardId"),
+                    @APIResponse(responseCode = "405")
+            }
+    )
     public Response addVote(@PathParam("cardId") long cardId){
         Optional<Retro_Card> cardOpt = Retro_Card.findByIdOptional(cardId);
         if (!cardOpt.isPresent())
@@ -60,6 +80,14 @@ public class RetroCardResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+    @Operation(summary = "Removes a vote from a Card", description = "Decrements the number of votes in a card by 1 if > 0")
+    @APIResponses(
+            value = {
+                    @APIResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json", example = "{votes: 3}")),
+                    @APIResponse(responseCode = "404", description = "Unable to find the card with the given cardId"),
+                    @APIResponse(responseCode = "405")
+            }
+    )
     public Response removeVote(@PathParam("cardId") long cardId ){
         Optional<Retro_Card> cardOpt = Retro_Card.findByIdOptional(cardId);
         if (!cardOpt.isPresent())

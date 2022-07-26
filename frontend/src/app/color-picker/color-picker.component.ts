@@ -23,7 +23,12 @@ export class ColorPickerComponent implements OnInit {
   constructor(private colorService: ColorService) {}
 
   ngOnInit(): void {
-
+    let rgb = this.colorService.hexToRgb(this.hex);
+    let rgba_str;
+    if (rgb) {
+      rgba_str = "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + "," + 1 + ")";
+    }
+    this.color = String(rgba_str);
   }
 
   public pickColor(event: MouseEvent) {
@@ -50,6 +55,7 @@ export class ColorPickerComponent implements OnInit {
 
     const hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2])).toString(16).slice(1)}`;
     return hex;
+    return this.colorService.rgba2hex(this.color);
   }
 }
 

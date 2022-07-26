@@ -3,7 +3,7 @@
   <div class="button-tray">
     <button [disabled]="!isMain() && mode!=1" (click)="mode=1"> new </button>
     <button class="alternative" [disabled]="!isMain() && mode!=2" (click)="mode=2"> join </button>
-    <button class="info"> help </button>
+    <button class="info" (click)="openmodal()"> help </button>
   </div>
   <div class="button-tray" *ngIf="mode==1">
     <button class="affirmative" (click)="newPoker()"> poker </button>
@@ -19,5 +19,16 @@
       </div>
     </div>
   </div>
+</div>
 
+<!-- Modal dialog tutorial by W3Schools -->
+<div id="helpmodal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closemodal()">&times;</span>
+    <p><strong>Critical Cards</strong></p>
+    <p>Welcome to Critical Cards! Click <u>New</u> to crete a new Retro Session or
+      <u>Join</u> to join an existing one.</p>
+    <p>Inside a Retro Session, you have lanes and you can create new ones. You can then add cards (colour-customizable) to these lanes and organize your work!  </p>
+    <p>Poker Sessions will soon be available.</p>
+  </div>
 </div>

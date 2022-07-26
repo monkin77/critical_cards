@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { interval, Subject, take, takeUntil } from 'rxjs';
 import { RetroSession } from '../DTOs/retro-session';
 import { RetroSessionService } from '../retro-session.service';
 import { CardsApiService } from '../cards-api.service';
@@ -31,10 +31,10 @@ export class RetroComponent implements OnInit, OnDestroy {
     this.cardsApi = cardsApi;
   }
 
-  ngOnInit(): void {
+  private updateSessionData() {
     this.retroSessionService
       .getSession(this.sessionId)
-      .pipe(takeUntil(this._unsubscribeAll))
+      .pipe(take(1))
       .subscribe({
         next: (session: RetroSession) => {
           this.session = session;
@@ -43,6 +43,13 @@ export class RetroComponent implements OnInit, OnDestroy {
           this.router.navigate(['pageNotFound']);
         },
       });
+  }
+
+  ngOnInit(): void {
+    this.updateSessionData();
+    interval(5000)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => this.updateSessionData());
   }
 
   ngOnDestroy(): void {

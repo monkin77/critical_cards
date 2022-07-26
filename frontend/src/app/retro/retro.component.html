@@ -1,11 +1,21 @@
-<div id="retro">
-  <p>Retro with session id: {{sessionId}}</p>
-
-  <div class="lanes">
-    <div class="lanesContainer">
-      <ng-container *ngFor="let lane of session?.lanes">
-        <app-retro-lane [lane-data]=lane></app-retro-lane>
-      </ng-container>
+<div class="header">
+    <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
+    <h2 id="retrotitle" *ngIf="edit==false">
+        {{session!.name}}
+        <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
+    </h2>
+    <div *ngIf="edit==true">
+        <input type="text" id="inputbox" name="inputbox" [(ngModel)]="session!.name">
+        <img (click)="saveName()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
     </div>
+
+  <button style="width: auto">Add Lane + </button>
+</div>
+
+<div class="lanes">
+  <div class="lanesContainer">
+    <ng-container *ngFor="let lane of session?.lanes">
+      <app-retro-lane [lane-data]=lane></app-retro-lane>
+    </ng-container>
   </div>
 </div>

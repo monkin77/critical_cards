@@ -5,14 +5,20 @@ import { RetroLane } from 'src/app/DTOs/retro-lane';
 import { RetroCard } from '../DTOs/retro-card';
 import { RetroSession } from '../DTOs/retro-session';
 import { RetroSessionService } from '../retro-session.service';
+import { CardsApiService } from '../cards-api.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-retro',
   templateUrl: './retro.component.html',
-  styleUrls: ['./retro.component.scss']
+  styleUrls: ['./retro.component.scss'],
 })
+
 export class RetroComponent implements OnInit, OnDestroy {
-  sessionId:String|null;
+  sessionId: number;
+  cardsApi: CardsApiService;
+  edit: boolean = false;
+  router: Router;
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -32,16 +38,14 @@ export class RetroComponent implements OnInit, OnDestroy {
 
   constructor(
     route: ActivatedRoute,
-    router:Router,
+    router: Router,
+    cardsApi: CardsApiService,
     private retroSessionService: RetroSessionService
   ) {
-
-      this.sessionId = route.snapshot.paramMap.get("id");
-    if(this.sessionId==null)
-      router.navigate(['pageNotFound']);
-
-
-
+    this.router = router;
+    this.sessionId = parseInt(route.snapshot.paramMap.get('id')!);
+    if (this.sessionId == null) router.navigate(['pageNotFound']);
+    this.cardsApi = cardsApi;
   }
 
   ngOnInit(): void {
@@ -58,4 +62,28 @@ export class RetroComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
 
+  back() {
+    this.router.navigate([".."]);
+  }
+
+  addLane() {
+    console.log('TODO, Should add lane');
+  }
+
+  editRetroName() {
+    this.edit = true;
+  }
+
+  saveName() {
+    this.edit = false;
+
+    this.cardsApi
+      .updateRetro(this.sessionId, { name: this.session!.name })
+      .subscribe((response: HttpResponse<any>) => {
+        if (response.status != 200) {
+          window.alert('Unable to edit name!');
+          return;
+        }
+      });
+  }
 }

@@ -9,7 +9,11 @@
         <img (click)="saveName()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
     </div>
 
-  <button style="width: auto" (click)="add_lane()">Add Lane + </button>
+  <div>
+    <input type="text" id="lanetext" name="lanetext" [(ngModel)]="lanetextInput">
+    <button (click)="addLane()" style="width: auto">Add Lane + </button>
+  </div>
+  <button (click)="removeLane()" style="width: auto">Remove Lane + </button>
 </div>
 
 <div class="lanes">

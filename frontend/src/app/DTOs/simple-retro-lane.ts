@@ -1,4 +1,4 @@
 export class SimpleRetroLane {
-  public name:String|undefined;
-  public color:String|undefined;
+  public name: String | undefined;
+  public color: String | undefined;
 }

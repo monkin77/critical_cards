@@ -15,7 +15,6 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
   @Input('data')
   public data!: RetroCard;
 
-  public text = '';
   public dark = false;
   public writemode = false;
 
@@ -41,6 +40,11 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
     this.writemode = mode;
   }
 
+  public edit_text(event: Event): void {
+    event.stopPropagation();
+    this.data.text = this.textEdit.nativeElement.value;
+  }
+
   public pickColor(event: MouseEvent): void {
     event.stopPropagation();
   }
@@ -49,10 +53,13 @@ export class RetroCardComponent implements AfterViewChecked, OnInit {
     event.stopPropagation();
   }
 
+  public delete(event: MouseEvent) : void{
+    event.stopPropagation();
+  }
+
 
   updateCardMode(): void {
     const rgb = this.colorService.hexToRgb(this.data.color);
     this.dark = rgb ? this.colorService.perceptiveLuminance(rgb) < 0.5 : false;
   }
-
 }

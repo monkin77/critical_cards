@@ -1,47 +1,56 @@
-import { Component, Input,OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { CardsApiService } from '../cards-api.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import { Subject, takeUntil } from 'rxjs';
+import { RetroLane } from 'src/app/DTOs/retro-lane';
+import { RetroCard } from '../DTOs/retro-card';
 import { RetroSession } from '../DTOs/retro-session';
+import { RetroSessionService } from '../retro-session.service';
+import { CardsApiService } from '../cards-api.service';
 import { HttpResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-retro',
   templateUrl: './retro.component.html',
   styleUrls: ['./retro.component.scss']
 })
-export class RetroComponent implements OnInit {
+
+export class RetroComponent implements OnInit, OnDestroy {
   sessionId: number;
-  @Input() retroSession: RetroSession | null = null;
   cardsApi: CardsApiService;
   edit: boolean = false;
   router: Router;
-  cards$: any = [];
 
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
+
+  public session?: RetroSession;
 
   constructor(
     route: ActivatedRoute,
     router: Router,
-    cardsApi: CardsApiService
+    cardsApi: CardsApiService,
+    private retroSessionService: RetroSessionService
   ) {
     this.router = router;
     this.sessionId = parseInt(route.snapshot.paramMap.get('id')!);
     if (this.sessionId == null) router.navigate(['pageNotFound']);
-    else {
-      // TODO get retro from service
-      this.retroSession = { id: -1, name: 'Mock Retro', lanes: [] };
-    }
     this.cardsApi = cardsApi;
   }
+
   ngOnInit(): void {
-    this.getAll();
-
+    this.retroSessionService.getSessions()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((session: RetroSession) => {
+        this.session = session;
+        console.log(this.session);
+      })
   }
 
-  getAll() {
-    this.cardsApi.getAllData(this.sessionId.toString()).subscribe(result => {
-      //Lane na linha 0 pré-definida pois não existem lanes criadas
-      this.cards$ = result.body.lanes[0].cards
-    })
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
+
   back() {
     this.router.navigate([".."]);
   }
@@ -54,11 +63,11 @@ export class RetroComponent implements OnInit {
     this.edit = true;
   }
 
-  savename() {
+  saveName() {
     this.edit = false;
 
     this.cardsApi
-      .updateRetro(this.sessionId, { name: this.retroSession!.name })
+      .updateRetro(this.sessionId, { name: this.session!.name })
       .subscribe((response: HttpResponse<any>) => {
         if (response.status != 200) {
           window.alert('Unable to edit name!');
@@ -66,5 +75,4 @@ export class RetroComponent implements OnInit {
         }
       });
   }
-
 }

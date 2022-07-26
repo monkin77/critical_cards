@@ -1,21 +1,21 @@
 <div class="header">
-  <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
-  <h2 id="retrotitle" *ngIf="edit==false">{{retroSession!.name}}
-    <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
-  </h2>
-  <div *ngIf="edit==true">
-    <input type="text" id="inputbox" name="inputbox" [(ngModel)]="retroSession!.name">
-    <img (click)="savename()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
-  </div>
+    <img (click)="back()" src="assets/icons/arrow_back.svg" alt="back button" class="icon">
+    <h2 id="retrotitle" *ngIf="edit==false">
+        {{session!.name}}
+        <img (click)="editRetroName()" src="assets/icons/pencil.svg" alt="edit retro name" class="icon edit-icon">
+    </h2>
+    <div *ngIf="edit==true">
+        <input type="text" id="inputbox" name="inputbox" [(ngModel)]="session!.name">
+        <img (click)="saveName()" src="assets/icons/save.svg" alt="edit retro name" class="icon save-icon" >
+    </div>
 
   <button style="width: auto">Add Lane + </button>
-
 </div>
 
-<div class="container">
-    <span class="container-item" *ngFor='let in of [0,1,2,3,4,5,6,7,8]'>
-      <div *ngFor="let card of cards$" style="display: flex; flex-direction: column; width: 20em; border: 2px solid black; padding: 1em; margin: auto;">
-          <app-retro-card [data]="{id: card.id, text: card.text, color: '#b61b23', votes: card.votes}"></app-retro-card>
-      </div>
-    </span>
+<div class="lanes">
+  <div class="lanesContainer">
+    <ng-container *ngFor="let lane of session?.lanes">
+      <app-retro-lane [lane-data]=lane></app-retro-lane>
+    </ng-container>
+  </div>
 </div>

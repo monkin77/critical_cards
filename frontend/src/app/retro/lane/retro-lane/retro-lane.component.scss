@@ -1,0 +1,39 @@
+.lane {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: antiquewhite;
+
+    min-height: 80vh;
+
+    padding: 1em;
+
+    border: 1px solid black;
+    border-radius: 1em;
+    box-shadow: 3px 2px #11111166;
+}
+
+@media only screen and (max-width: 400px) {
+    .lane {
+        width: 200px;
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    .lane {
+        width: 300px;
+    }
+}
+
+.color_palette {
+    cursor: pointer;
+
+    display: inline;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+}

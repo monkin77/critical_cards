@@ -16,11 +16,11 @@
 
 
     <img (click)="pickColor($event)" src="assets/icons/color_palette.svg" alt="color palette" class="icon color_palette">
-    <span class="card-text" contenteditable>{{ data.text }}</span>
+    <span class="card-text" >{{ data.text }}</span>
   </div>
 
   <div [hidden]="!writemode" class="card-inner">
-    <textarea type="textarea" #card_text name="card_text" [defaultValue]="data.text" (input)="edit_text($event)"></textarea>
+    <textarea type="textarea" #card_text name="card_text" [defaultValue]="data.text" (change)="edit_text($event)"></textarea>
     <img (click)="delete($event)" src="assets/icons/delete.svg" alt="delete card" class="icon delete_btt">
   </div>
 
